@@ -2,13 +2,10 @@ import os
 import time
 from pathlib import Path
 
-from dotenv import load_dotenv
 from flask import Flask, abort, jsonify, request, send_from_directory
 
 import db
-import vision
-
-load_dotenv()
+import extract
 
 BASE_DIR = Path(__file__).parent
 UPLOAD_DIR = BASE_DIR / "data" / "uploads"
@@ -36,8 +33,8 @@ def analyze():
     photo.save(path)
 
     try:
-        result = vision.analyze_image(path)
-    except vision.VisionError as e:
+        result = extract.analyze_image(path)
+    except extract.ExtractionError as e:
         return jsonify({"error": str(e)}), 502
     except Exception as e:
         return jsonify({"error": f"Analysis failed: {e}"}), 500
