@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Italian Lens</title>
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Italian Lens</h1>
+  </header>
+
+  <main id="view-capture" class="view active">
+    <div id="captureEmpty" class="capture-empty">
+      <p>Point your camera at Italian text — a menu, a sign, a shelf label — and capture it.</p>
+      <label class="btn btn-primary btn-big" for="photoInput">Take Photo</label>
+    </div>
+
+    <div id="capturePreview" class="capture-preview" hidden>
+      <img id="previewImg" alt="Captured photo">
+      <div class="capture-actions">
+        <button id="retakeBtn" class="btn btn-secondary">Retake</button>
+        <button id="analyzeBtn" class="btn btn-primary">Analyze</button>
+      </div>
+    </div>
+
+    <input type="file" id="photoInput" accept="image/*" capture="environment" hidden>
+    <canvas id="workCanvas" hidden></canvas>
+
+    <div id="analyzing" class="status-panel" hidden>
+      <div class="spinner"></div>
+      <p>Reading the scene…</p>
+    </div>
+
+    <div id="analyzeError" class="status-panel error" hidden></div>
+
+    <section id="results" class="results" hidden>
+      <p id="sceneDescription" class="scene-description"></p>
+
+      <div class="results-block">
+        <h2>Text found</h2>
+        <ul id="phrasesList" class="phrases-list"></ul>
+      </div>
+
+      <div class="results-block">
+        <h2>New vocabulary</h2>
+        <ul id="vocabList" class="vocab-list"></ul>
+      </div>
+
+      <button id="doneBtn" class="btn btn-secondary btn-big">Saved — Take Another</button>
+    </section>
+  </main>
+
+  <main id="view-review" class="view">
+    <div class="review-toolbar">
+      <input type="search" id="vocabSearch" placeholder="Search your vocabulary…">
+    </div>
+    <ul id="reviewList" class="vocab-list review-list"></ul>
+    <p id="reviewEmpty" class="empty-hint" hidden>No vocabulary yet — capture something to start building your list.</p>
+  </main>
+
+  <main id="view-history" class="view">
+    <ul id="historyList" class="history-list"></ul>
+    <p id="historyEmpty" class="empty-hint" hidden>No captures yet.</p>
+  </main>
+
+  <div id="captureDetail" class="detail-overlay" hidden>
+    <button id="closeDetailBtn" class="btn-close">&times;</button>
+    <div class="detail-content">
+      <img id="detailImg" alt="Capture">
+      <p id="detailScene" class="scene-description"></p>
+      <ul id="detailPhrases" class="phrases-list"></ul>
+    </div>
+  </div>
+
+  <nav class="tabbar">
+    <button class="tab active" data-view="capture">Capture</button>
+    <button class="tab" data-view="review">Review</button>
+    <button class="tab" data-view="history">History</button>
+  </nav>
+
+  <script src="app.js?v=1"></script>
+</body>
+</html>
